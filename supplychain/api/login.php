@@ -3,7 +3,8 @@
 $username = $_REQUEST["username"];
 $password = $_REQUEST["password"];
 
-$dbh = new PDO("mysql:dbname=supplychain;host=127.1", "supplyuser", "chainuser");
+// $dbh = new PDO("mysql:dbname=supplychain;host=127.1", "supplyuser", "chainuser");
+$dbh = new PDO("mysql:dbname=heroku_a2869373e9ca23f;host=us-cdbr-iron-east-01.cleardb.net", "b69d6d61cb2e3d", "38c67e52");
 
 try {
     $stmt1 = $dbh->prepare("SELECT password FROM login WHERE username=?");
