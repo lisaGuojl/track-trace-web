@@ -1,0 +1,1 @@
+$(ruby -e 'require "uri"; uri = URI.parse(ARGV[0]); puts "mysql -u#{uri.user} -p#{uri.password} -h#{uri.host} -D#{uri.path.gsub("/", "")}"' `heroku config:get CLEARDB_DATABASE_URL`)
