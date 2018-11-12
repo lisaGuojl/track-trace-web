@@ -1284,7 +1284,7 @@
 
 <!-- App js -->
 <script src="assets/js/jquery.core.js"></script>
-<script src="assets/js/jquery.app.js"></script>
+<!--<script src="assets/js/jquery.app.js"></script>-->
 <script src='https://dmla.github.io/jsqrcode/src/qr_packed.js'></script>
 
 <script src="../plugins/morris/morris.min.js"></script>
@@ -1353,7 +1353,8 @@
                             self.field = field;
                             self.result_party = response.data;
                             setTimeout(() => {
-                                self.create_datatable();
+                                self.create_datatable('#datatable-1');
+                                self.create_datatable('#datatable-5');
                             }, 0);
 
                         }
@@ -1399,7 +1400,7 @@
                         console.log(response);
                         self.result_all = response.data;
                         setTimeout(() => {
-                            self.create_datatable();
+                            self.create_datatable('#datatable-2');
                         }, 0);
                     })
                     .catch(function (response) {
@@ -1449,7 +1450,7 @@
                         console.log(response);
                         self.result_query_product = response.data;
                         setTimeout(() => {
-                            self.create_datatable();
+                            self.create_datatable('#datatable-3');
                         }, 0);
                     })
                     .catch(function (response) {
@@ -1477,7 +1478,7 @@
                         } else {
                             self.result_query_product_history = response.data;
                             setTimeout(() => {
-                                self.create_datatable();
+                                self.create_datatable('#datatable-4');
                             }, 0);
                         }
                     })
@@ -1503,7 +1504,7 @@
                         console.log(response);
                         self.result_accountinfo = response.data;
                         setTimeout(() => {
-                            self.create_datatable();
+                            self.create_datatable('#datatable');
                         }, 0);
                     })
                     .catch(function (response) {
@@ -1576,38 +1577,33 @@
                     });
 
             },
-            create_datatable: function () {
-                $('#datatable-1').DataTable();
-                $('#datatable-2').DataTable();
-                $('#datatable-3').DataTable();
-                $('#datatable-4').DataTable();
-                $('#datatable-5').DataTable();
-                $('#datatable').DataTable();
+            create_datatable: function (table) {
+                $(table).DataTable();
 
-                //Buttons examples
-                var table = $('#datatable-buttons').DataTable({
-                    lengthChange: false,
-                    buttons: ['copy', 'excel', 'pdf']
-                });
+                // //Buttons examples
+                // var table = $('#datatable-buttons').DataTable({
+                //     lengthChange: false,
+                //     buttons: ['copy', 'excel', 'pdf']
+                // });
 
                 // Key Tables
 
-                $('#key-table').DataTable({
-                    keys: true
-                });
-
-                // Responsive Datatable
-                $('#responsive-datatable').DataTable();
-
-                // Multi Selection Datatable
-                $('#selection-datatable').DataTable({
-                    select: {
-                        style: 'multi'
-                    }
-                });
-
-                table.buttons().container()
-                    .appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
+                // $('#key-table').DataTable({
+                //     keys: true
+                // });
+                //
+                // // Responsive Datatable
+                // $('#responsive-datatable').DataTable();
+                //
+                // // Multi Selection Datatable
+                // $('#selection-datatable').DataTable({
+                //     select: {
+                //         style: 'multi'
+                //     }
+                // });
+                //
+                // table.buttons().container()
+                //     .appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
             },
 
             transfer_button: function (item) {
@@ -1937,6 +1933,6 @@
 
     console.log(v)
 </script>
-
+<script src="assets/js/jquery.app.js"></script>
 </body>
 </html>
