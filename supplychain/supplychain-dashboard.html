@@ -32,6 +32,9 @@
 
     <script src="assets/js/modernizr.min.js"></script>
 
+    <!--QR Styling -->
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 
@@ -51,7 +54,7 @@
                     <!--</a>-->
                     <!-- Image Logo -->
                     <a href="supplychain-dashboard.html" class="logo">
-                        <img src="assets/images/logo_dark.png" alt="" height="20" class="logo-lg">
+                        <img src="assets/images/logo_dark.png" alt="" height="24" class="logo-lg">
                         <img src="assets/images/logo_sm.png" alt="" height="24" class="logo-sm">
                     </a>
 
@@ -231,7 +234,7 @@
                     <div class="page-title-box">
                         <div class="btn-group pull-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
-                                <li class="breadcrumb-item"><a href="#">Supply Chain</a></li>
+                                <li class="breadcrumb-item"><a href="#">DigiTrack</a></li>
                                 <li class="breadcrumb-item active">Dashboard</li>
                             </ol>
                         </div>
@@ -307,7 +310,7 @@
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="widget-panel widget-style-2 bg-white">
                             <i class="md md-create text-primary"></i>
-                            <h2 class="m-0 text-dark counter font-600"><a href="supplychain/postrecords.html"
+                            <h2 class="m-0 text-dark counter font-600"><a @click="switch_div('postrecords')"
                                                                           style="color:#797979">Entry</a>
                             </h2>
                             <div class="text-muted m-t-5">Manual</div>
@@ -316,7 +319,7 @@
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="widget-panel widget-style-2 bg-white">
                             <i class="md md-camera-alt text-primary"></i>
-                            <h2 class="m-0 text-dark counter font-600"><a href="qr-code/qr-code.html"
+                            <h2 class="m-0 text-dark counter font-600"><a @click="switch_div('qr_code')"
                                                                           style="color:#797979">Scan
                                 QR</a>
                             </h2>
@@ -485,7 +488,7 @@
                     <div class="page-title-box">
                         <div class="btn-group pull-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
-                                <li class="breadcrumb-item"><a href="#">Supply Chain</a></li>
+                                <li class="breadcrumb-item"><a href="#">DigiTrack</a></li>
                                 <!--<li class="breadcrumb-item"><a href="#">Supply Chain</a></li>-->
                                 <li class="breadcrumb-item"><a href="../supplychain-dashboard.html">Participants</a>
                                 </li>
@@ -637,9 +640,9 @@
                     <div class="page-title-box">
                         <div class="btn-group pull-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
-                                <li class="breadcrumb-item"><a href="#">Supplychain</a></li>
+                                <li class="breadcrumb-item"><a href="#">DigiTrack</a></li>
                                 <!--<li class="breadcrumb-item"><a href="#">Supply Chain</a></li>-->
-                                <li class="breadcrumb-item active">Post Recordse</li>
+                                <li class="breadcrumb-item active">Post Records</li>
                             </ol>
                         </div>
                         <h4 class="page-title">Post Records</h4>
@@ -690,7 +693,10 @@
                                 <!--&lt;!&ndash;<button type="file" class="filestyle" id='uploadfile' name="file" @click="process_upload()">Upload File</button>&ndash;&gt;-->
                                 <!--</div>-->
 
-                                <button type="submit" class="btn btn-primary" @click="postrecords">Submit</button>
+                                <button type="submit"
+                                        class="btn btn-default btn-custom btn-rounded waves-effect waves-light"
+                                        @click="postrecords">Submit
+                                </button>
 
                             </form>
                         </div>
@@ -712,7 +718,7 @@
                     <div class="page-title-box">
                         <div class="btn-group pull-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
-                                <li class="breadcrumb-item"><a href="#">Supply Chain</a></li>
+                                <li class="breadcrumb-item"><a href="#">DigiTrack</a></li>
                                 <!--<li class="breadcrumb-item"><a href="#">Supply Chain</a></li>-->
                                 <li class="breadcrumb-item active">Query Products</li>
                             </ol>
@@ -776,7 +782,7 @@
                     <div class="page-title-box">
                         <div class="btn-group pull-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
-                                <li class="breadcrumb-item"><a href="#">Supplychain</a></li>
+                                <li class="breadcrumb-item"><a href="#">DigiTrack</a></li>
                                 <!--<li class="breadcrumb-item"><a href="#">Supply Chain</a></li>-->
 
                                 <li class="breadcrumb-item active">Query Products</li>
@@ -788,68 +794,78 @@
             </div>
             <!-- end page title end breadcrumb -->
 
-            <div class="p-20">
-                <form id="submit_query_product">
-
-                    <div class="form-group row">
-                        <label class="col-2 col-form-label">Field</label>
-                        <div class="col-10">
-                            <select id="submit_query_product.field" name="field" class="form-control select2">
-                                <option value="Product Name">Product Name</option>
-                                <option value="Product SerialNo">Product Serial No.</option>
-                                <option value="Product CodeNo">Product Code No.</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-2 col-form-label">Value</label>
-                        <div class="col-10">
-                            <input type="text" class="form-control" name="value" id="submit_query_product.value">
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                    <button type="submit" class="btn btn-primary" @click="query_products">
-                        Submit
-                    </button>
-                </form>
-            </div>
-
-            <div v-show="result_query_product.length>0" class="row">
+            <div class="row">
                 <div class="col-12">
                     <div class="card-box table-responsive">
-                        <h4 class="m-t-0 header-title"></h4>
-                        <!--<p class="text-muted font-14 m-b-30">-->
-                        <!--DataTables has most features enabled by default, so all you need to do to use it with your own-->
-                        <!--tables is to call the construction function: <code>$().DataTable();</code>.-->
-                        <!--</p>-->
-                        <br/>
+                        <div class="p-20">
+                            <form id="submit_query_product">
 
-                        <table id="datatable-3" class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th>Serial No.</th>
-                                <th>Name</th>
-                                <th>Cost</th>
-                                <th>Code No</th>
-                                <th>Location</th>
-                            </tr>
-                            </thead>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label">Field</label>
+                                    <div class="col-10">
+                                        <select id="submit_query_product.field" name="field"
+                                                class="form-control select2">
+                                            <option value="Product Name">Product Name</option>
+                                            <option value="Product SerialNo">Product Serial No.</option>
+                                            <option value="Product CodeNo">Product Code No.</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label">Value</label>
+                                    <div class="col-10">
+                                        <input type="text" class="form-control" name="value"
+                                               id="submit_query_product.value">
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <button type="submit"
+                                        class="btn btn-default btn-custom btn-rounded waves-effect waves-light"
+                                        @click="query_products">
+                                    Submit
+                                </button>
+                            </form>
+                        </div>
 
-                            <tbody>
-                            <tr v-for="item in result_query_product">
-                                <td v-text="item.SerialNo"></td>
-                                <td v-text="item.Name"></td>
-                                <td v-text="item.Cost"></td>
-                                <td v-text="item.CodeNo"></td>
-                                <td v-text="item.Location"></td>
+                        <div v-show="result_query_product.length>0" class="row">
+                            <div class="col-12">
+                                <div class="card-box table-responsive">
+                                    <h4 class="m-t-0 header-title"></h4>
+                                    <!--<p class="text-muted font-14 m-b-30">-->
+                                    <!--DataTables has most features enabled by default, so all you need to do to use it with your own-->
+                                    <!--tables is to call the construction function: <code>$().DataTable();</code>.-->
+                                    <!--</p>-->
+                                    <br/>
 
-                            </tr>
-                            </tbody>
-                        </table>
+                                    <table id="datatable-3" class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>Serial No.</th>
+                                            <th>Name</th>
+                                            <th>Cost</th>
+                                            <th>Code No</th>
+                                            <th>Location</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <tr v-for="item in result_query_product">
+                                            <td v-text="item.SerialNo"></td>
+                                            <td v-text="item.Name"></td>
+                                            <td v-text="item.Cost"></td>
+                                            <td v-text="item.CodeNo"></td>
+                                            <td v-text="item.Location"></td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div> <!-- end row -->
                     </div>
                 </div>
-            </div> <!-- end row -->
+            </div>
 
 
         </div> <!-- end container -->
@@ -863,7 +879,7 @@
                     <div class="page-title-box">
                         <div class="btn-group pull-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
-                                <li class="breadcrumb-item"><a href="#">Supplychain</a></li>
+                                <li class="breadcrumb-item"><a href="#">DigiTrack</a></li>
                                 <!--<li class="breadcrumb-item"><a href="#">Supply Chain</a></li>-->
                                 <!--<li class="breadcrumb-item"><a href="../supplychain-dashboard.html">Dashboard</a></li>-->
                                 <li class="breadcrumb-item active">Query Products</li>
@@ -896,7 +912,10 @@
                                     </div>
                                 </div>
 
-                                <button type="submit" @click="submit_query_product_history">Submit</button>
+                                <button type="submit"
+                                        class="btn btn-default btn-custom btn-rounded waves-effect waves-light"
+                                        @click="submit_query_product_history">Submit
+                                </button>
 
                             </form>
 
@@ -949,7 +968,7 @@
                     <div class="page-title-box">
                         <div class="btn-group pull-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
-                                <li class="breadcrumb-item"><a href="#">Supply chain</a></li>
+                                <li class="breadcrumb-item"><a href="#">DigiTrack</a></li>
                                 <!--<li class="breadcrumb-item"><a href="#">Supply Chain</a></li>-->
                                 <!--<li class="breadcrumb-item"><a-->
                                 <!--href="../supplychain-dashboard.html">Dashboard</a></li>-->
@@ -962,70 +981,79 @@
             </div>
             <!-- end page title end breadcrumb -->
 
-            <div class="p-20">
-                <form id="accountinfo">
-                    <h5><b>Particulars</b></h5>
-                    <select id="accountinfo.dir" name="dir" class="form-control select2">
-                        <option value="Income">Income</option>
-                        <option value="Expenditure">Expenditure</option>
-                    </select>
-                    <h5><b>Participant</b></h5>
-                    <select id="accountinfo.loc" name="loc" class="form-control select2">
-                        <option value="Producer">Producer</option>
-                        <option value="Exporter">Exporter</option>
-                        <option value="Carrier">Carrier</option>
-                        <option value="Importer">Importer</option>
-                        <option value="Distributor">Distributor</option>
-                        <option value="Customer">Customer</option>
-                    </select>
-                    <br>
-                    <br>
-                    <button type="submit" class="btn btn-primary" @click="query_account_info">
-                        Submit
-                    </button>
-                </form>
-            </div>
 
-            <div v-show="result_accountinfo.length>0" class="row">
+            <div class="row">
                 <div class="col-12">
                     <div class="card-box table-responsive">
-                        <h4 class="m-t-0 header-title"></h4>
-                        <!--<p class="text-muted font-14 m-b-30">-->
-                        <!--DataTables has most features enabled by default, so all you need to do to use it with your own-->
-                        <!--tables is to call the construction function: <code>$().DataTable();</code>.-->
-                        <!--</p>-->
-                        <br/>
+                        <div class="p-20">
+                            <form id="accountinfo">
+                                <h5><b>Particulars</b></h5>
+                                <select id="accountinfo.dir" name="dir" class="form-control select2">
+                                    <option value="Income">Income</option>
+                                    <option value="Expenditure">Expenditure</option>
+                                </select>
+                                <h5><b>Participant</b></h5>
+                                <select id="accountinfo.loc" name="loc" class="form-control select2">
+                                    <option value="Producer">Producer</option>
+                                    <option value="Exporter">Exporter</option>
+                                    <option value="Carrier">Carrier</option>
+                                    <option value="Importer">Importer</option>
+                                    <option value="Distributor">Distributor</option>
+                                    <option value="Customer">Customer</option>
+                                </select>
+                                <br>
+                                <br>
+                                <button type="submit"
+                                        class="btn btn-default btn-custom btn-rounded waves-effect waves-light"
+                                        @click="query_account_info">
+                                    Submit
+                                </button>
+                            </form>
+                        </div>
 
-                        <table id="datatable" class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th>Snapshot</th>
-                                <th>Timestamp</th>
-                                <th>Serial No.</th>
-                                <th>Pdt. Name</th>
-                                <th>Pdt. Cost</th>
-                                <th>Pdt. Code</th>
-                                <th>Party</th>
-                                <th>Particulars</th>
-                            </tr>
-                            </thead>
+                        <div v-show="result_accountinfo.length>0" class="row">
+                            <div class="col-12">
+                                <div class="card-box table-responsive">
+                                    <h4 class="m-t-0 header-title"></h4>
+                                    <!--<p class="text-muted font-14 m-b-30">-->
+                                    <!--DataTables has most features enabled by default, so all you need to do to use it with your own-->
+                                    <!--tables is to call the construction function: <code>$().DataTable();</code>.-->
+                                    <!--</p>-->
+                                    <br/>
 
-                            <tbody>
-                            <tr v-for="item in result_accountinfo">
-                                <td v-text="item.Snapshot"></td>
-                                <td v-text="item.Timestamp"></td>
-                                <td v-text="item.SerialNo"></td>
-                                <td v-text="item.Name"></td>
-                                <td v-text="item.Cost"></td>
-                                <td v-text="item.CodeNo"></td>
-                                <td v-text="item.Party"></td>
-                                <td v-text="item.Direction"></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                                    <table id="datatable" class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>Snapshot</th>
+                                            <th>Timestamp</th>
+                                            <th>Serial No.</th>
+                                            <th>Product Name</th>
+                                            <th>Product Cost</th>
+                                            <th>Product Code</th>
+                                            <th>Party</th>
+                                            <th>Particulars</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <tr v-for="item in result_accountinfo">
+                                            <td v-text="item.Snapshot"></td>
+                                            <td v-text="item.Timestamp"></td>
+                                            <td v-text="item.SerialNo"></td>
+                                            <td v-text="item.Name"></td>
+                                            <td v-text="item.Cost"></td>
+                                            <td v-text="item.CodeNo"></td>
+                                            <td v-text="item.Party"></td>
+                                            <td v-text="item.Direction"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div> <!-- end row -->
                     </div>
                 </div>
-            </div> <!-- end row -->
+            </div>
 
 
         </div> <!-- end container -->
@@ -1039,7 +1067,7 @@
                     <div class="page-title-box">
                         <div class="btn-group pull-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
-                                <li class="breadcrumb-item"><a href="#">Supply chain</a></li>
+                                <li class="breadcrumb-item"><a href="#">DigiTrack</a></li>
                                 <!--<li class="breadcrumb-item"><a href="#">Supply Chain</a></li>-->
                                 <!--<li class="breadcrumb-item"><a href="../supplychain-dashboard-new.html">Dashboard</a></li>-->
                                 <li class="breadcrumb-item active">Blockchain</li>
@@ -1092,6 +1120,85 @@
 
         </div> <!-- end container -->
     </div>
+    <div v-show="action === 'qr_code'" class="wrapper">
+        <div class="container-fluid">
+
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="btn-group pull-right">
+                            <ol class="breadcrumb hide-phone p-0 m-0">
+                                <li class="breadcrumb-item"><a href="#">DigiTrack</a></li>
+                                <li class="breadcrumb-item active"><a href="#">QR Code</a></li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Scan QR Code</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title end breadcrumb -->
+
+            <div class="row">
+                <div class="col-md-12 portlets">
+                    <div class="m-b-30">
+                        <form class="dropzone" id="postrecord">
+                            <div class="fallback">
+                                <label class=qrcode-text-btn style="margin: 1em;">
+                                    <input type="file" id="qr_file"
+                                           accept="image/*" capture=environment
+                                           @change="read_qrcode" multiple/>
+                                </label>
+                            </div>
+                        </form>
+
+                        <div class="clearfix pull-right m-t-15">
+                            <button type="button" @click="qr_postrecords"
+                                    class="btn btn-pink btn-rounded waves-effect waves-light">Submit
+                            </button>
+                        </div>&nbsp;&nbsp;&nbsp;
+                        <div class="clearfix pull-right m-t-15">
+                            <button type="button" @click="process_upload"
+                                    class="btn btn-pink btn-rounded waves-effect waves-light">Upload
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+            <div v-show="result_qrcode_showintable.length > 0" class="row">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card-box table-responsive">
+
+                            <table id="datatable" class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Product Code</th>
+                                    <th>Product Cost</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <!--<tr v-for="item in result_read_qrcode">-->
+                                <td v-text="result_read_qrcode.name"></td>
+                                <td v-text="result_read_qrcode.code"></td>
+                                <td v-text="result_read_qrcode.cost"></td>
+                                <!--</tr>-->
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div> <!-- end container -->
+    </div>
 
     <!-- end wrapper -->
 
@@ -1101,7 +1208,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    © 2018 NTU
+                    © 2018 DigiTrack
                 </div>
             </div>
         </div>
@@ -1178,6 +1285,7 @@
 <!-- App js -->
 <script src="assets/js/jquery.core.js"></script>
 <script src="assets/js/jquery.app.js"></script>
+<script src='https://dmla.github.io/jsqrcode/src/qr_packed.js'></script>
 
 <script src="../plugins/morris/morris.min.js"></script>
 <script src="../plugins/raphael/raphael-min.js"></script>
@@ -1195,6 +1303,11 @@
 
     .tabs .indicator {
         /*display: none;*/
+    }
+
+    .qr {
+        margin-left: 1em;
+        margin-top: 1em;
     }
 </style>
 
@@ -1219,7 +1332,7 @@
             submit_query_party: function (field) {
                 let self = this;
                 self.switch_div('participants');
-                setTimeout(()=> {
+                setTimeout(() => {
                     $('ul.tabs a:contains(' + field.charAt(0).toUpperCase() + field.slice(1) + ')').trigger('click');
                 }, 0);
                 axios({
@@ -1531,6 +1644,95 @@
                 // });
             },
 
+            read_qrcode: function (node) {
+                let self = this;
+                var reader = new FileReader();
+                reader.onload = function () {
+                    // node.value = "";
+                    qrcode.callback = function (res) {
+                        if (res instanceof Error) {
+                            alert("No QR code found. Please make sure the QR code is within the camera's frame and try again.");
+                        } else {
+                            self.result_read_qrcode = JSON.parse(res);
+                            self.result_qrcode_showintable = res;
+                            //self.postrecords(res);
+                        }
+                    };
+                    qrcode.decode(reader.result);
+                };
+                reader.readAsDataURL(document.getElementById('qr_file').files[0]);
+            },
+
+            process_upload() {
+                document.getElementById('qr_file').click();
+                // document.getElementById('postrecord').click();
+            },
+            qr_postrecords: function (e) {
+                e.preventDefault();
+                let self = this;
+                let form = new FormData();
+                form.set('name', self.result_read_qrcode['name']);
+                form.set('code', self.result_read_qrcode['code']);
+                form.set('cost', self.result_read_qrcode['cost']);
+                axios({
+                    method: 'post',
+                    url: 'api/postrecords.php',
+                    data: form,
+                    //data: new FormData(document.getElementById('postrecord')),
+                    config: {headers: {'Content-Type': 'multipart/form-data'}}
+                })
+                    .then(function (response) {
+                        //handle success
+                        console.log(response);
+                        let data = response.data;
+                        if (data.status === "fail") {
+
+                            alert(data.message);
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(function (response) {
+                        //handle error
+                        console.log(response);
+                    });
+                result_read_qrcode = [];
+            },
+            // init_dropzone: () => {
+            //     let myDropzone = new Dropzone('#postrecord', {
+            //         url: "/file/post",
+            //         autoQueue: false,
+            //         autoProcessQueue: false
+            //     });
+            //     myDropzone.on("addedfile", function (file) {
+            //         console.log(file);
+            //     });
+            // }
+
+            logout: function () {
+                let self = this;
+                axios({
+                    method: 'post',
+                    url: 'api/logout.php',
+                    config: {headers: {'Content-Type': 'multipart/form-data'}}
+                })
+                    .then(function (response) {
+                        //handle success
+                        console.log(response);
+                        let data = response.data;
+                        if (data.status === "fail") {
+                            alert(data.message);
+                        } else {
+                            location.href = data.message;
+                        }
+                    })
+                    .catch(function (response) {
+                        //handle error
+                        console.log(response);
+                    });
+
+            },
+
             dynamic_func: function (item) {
                 let self = this;
                 // $('#chaining-alert').click(function () {
@@ -1720,6 +1922,9 @@
                 accountinfo: {},
                 result_accountinfo: [],
                 result_blockchain: '',
+                result_qrcode_showintable: [],
+                result_postrecorl: [],
+                result_read_qrcode: [],
             };
         },
 

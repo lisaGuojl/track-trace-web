@@ -1,0 +1,5 @@
+body, input {font-size:14pt}
+input, label {vertical-align:middle}
+.qrcode-text {padding-right:1.7em; margin-right:1em; margin-top: 1em}
+.qrcode-text-btn {display:inline-block; background:url(1499401426qr_icon.svg) 80% 80% no-repeat; height:3em; width:3em; margin-left:-1.7em; cursor:pointer}
+.qrcode-text-btn > input[type=file] {position:absolute; overflow:hidden; width:1px; height:1px; opacity:0}

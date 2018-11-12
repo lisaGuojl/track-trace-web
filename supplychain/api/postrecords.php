@@ -33,7 +33,7 @@ if (Session::getCurrentSession()->checkUserPermission(Role::PERMISSION_POST)) {
         $file="no+file";
         $postaction = "http://supplychain-engine.herokuapp.com/post/" . "$CodeNo" . "/" . "$Name" . "/" . "$Cost" ;
         $response = file_get_contents($postaction);
-        $msg = 'You have sent the record successfully but no file uploaded!';
+        $msg = 'You have posted the record successfully!';
         echo json_encode(['status' => 'success', "message" => $msg]);
     }
 } else {
