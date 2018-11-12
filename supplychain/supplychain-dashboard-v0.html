@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>NTU Supplychain Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
+    <meta content="Coderthemes" name="author"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!--Morris Chart CSS -->
+    <link rel="stylesheet" href="../plugins/morris/morris.css">
+
+    <!-- App css -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/icons.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+
+    <script src="assets/js/modernizr.min.js"></script>
+
+</head>
+
+
+<body>
+<div id="app">
+
+    <!-- Navigation Bar-->
+    <header id="topnav">
+        <div class="topbar-main">
+            <div class="container-fluid">
+
+                <!-- Logo container-->
+                <div class="logo">
+                    <!-- Text Logo -->
+                    <!--<a href="index.html" class="logo">-->
+                    <!--UBold-->
+                    <!--</a>-->
+                    <!-- Image Logo -->
+                    <a href="supplychain-dashboard.html" class="logo">
+                        <img src="assets/images/logo_dark.png" alt="" height="20" class="logo-lg">
+                        <img src="assets/images/logo_sm.png" alt="" height="24" class="logo-sm">
+                    </a>
+
+                </div>
+                <!-- End Logo container-->
+
+                <!--<div>-->
+                <!--<span v-text="current_user.username"></span>-->
+                <!--</div>-->
+
+
+                <div class="menu-extras topbar-custom">
+
+                    <ul class="list-inline float-right mb-0">
+
+                        <li class="menu-item list-inline-item">
+                            <!-- Mobile menu toggle-->
+                            <a class="navbar-toggle nav-link">
+                                <div class="lines">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </a>
+                            <!-- End mobile menu toggle-->
+                        </li>
+                        <li class="list-inline-item dropdown notification-list">
+                            <a class="nav-link dropdown-toggle arrow-none waves-light waves-effect"
+                               data-toggle="dropdown"
+                               href="#" role="button"
+                               aria-haspopup="false" aria-expanded="false">
+                                <i class="dripicons-bell noti-icon"></i>
+                                <span class="badge badge-pink noti-icon-badge">4</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-lg"
+                                 aria-labelledby="Preview">
+                                <!-- item-->
+                                <div class="dropdown-item noti-title">
+                                    <h5><span class="badge badge-danger float-right">5</span>Notification</h5>
+                                </div>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-success"><i class="icon-bubble"></i></div>
+                                    <p class="notify-details">Robert S. Taylor commented on Admin
+                                        <small class="text-muted">1 min ago</small>
+                                    </p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-info"><i class="icon-user"></i></div>
+                                    <p class="notify-details">New user registered.
+                                        <small class="text-muted">1 min ago</small>
+                                    </p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-danger"><i class="icon-like"></i></div>
+                                    <p class="notify-details">Carlos Crouch liked <b>Admin</b>
+                                        <small class="text-muted">1 min ago</small>
+                                    </p>
+                                </a>
+
+                                <!-- All-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item notify-all">
+                                    View All
+                                </a>
+
+                            </div>
+                        </li>
+
+                        <li class="list-inline-item dropdown notification-list">
+                            <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown"
+                               href="#" role="button"
+                               aria-haspopup="false" aria-expanded="false">
+                                <img src="assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle">
+                                &nbsp;Hello, <span v-text="current_user.username"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right profile-dropdown " aria-labelledby="Preview">
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="md md-account-circle"></i> <span>Profile</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="md md-settings"></i> <span>Settings</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="md md-lock-open"></i> <span>Lock Screen</span>
+                                </a>
+
+                                <!-- item-->
+                                <a @click="logout()" class="dropdown-item notify-item">
+                                    <i class="md md-settings-power"></i>
+                                    <span>Logout</span>
+                                </a>
+
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- end menu-extras -->
+
+                <div class="clearfix"></div>
+
+            </div> <!-- end container -->
+        </div>
+        <!-- end topbar-main -->
+
+        <div class="navbar-custom">
+            <div class="container-fluid">
+                <div id="navigation">
+                    <!-- Navigation Menu-->
+                    <ul class="navigation-menu">
+
+                        <li @click="switch_div('home')"><a href="#"><i class="md md-dashboard"></i>Dashboard</a></li>
+
+                        <li class="has-submenu" :class="{active: action==='participants'}">
+                            <a href="#"><i class="md md-color-lens"></i>Participants</a>
+                            <ul class="submenu">
+                                <li @click="submit_query_party('producer')" :class="{active:field==='producer'}"><a href="#">Producer</a></li>
+                                <li @click="submit_query_party('exporter')" :class="{active:field==='exporter'}"><a href="#">Exporter</a></li>
+                                <li @click="submit_query_party('carrier')" :class="{active:field==='carrier'}"><a href="#">Carrier</a></li>
+                                <li @click="submit_query_party('importer')" :class="{active:field==='importer'}"><a href="#">Importer</a></li>
+                                <li @click="submit_query_party('distributor')" :class="{active:field==='distributor'}"><a href="#">Distributor</a></li>
+                                <li @click="submit_query_party('consumer')" :class="{active:field==='consumer'}"><a href="#">Consumer</a></li>
+                            </ul>
+                        </li>
+
+
+                        <li v-show="current_user.permissions.indexOf(1) >=0" @click="switch_div('postrecords')"><a href="#">
+                            <i class="md md-layers"></i>Post Records</a></li>
+
+
+                        <li @click="switch_div('viewrecords'); submit_query_all();"><a href="#"><i class="md md-class"></i>View Records</a></li>
+                        <li @click="switch_div('queryproducts')"><a href="#"><i class="md md-class"></i>Query Products</a></li>
+                        <li @click="switch_div('queryhistory')"><a href="#"><i class="md md-pages"></i>Query History</a></li>
+                        <li @click="switch_div('accounts')"><a href="#"><i class="md md-folder-special"></i>Accounts</a></li>
+                        <li @click="switch_div('blockchain'); submit_query_blockchain();"><a href="#"><i class="md md-timeline"></i>Blockchain</a>
+                        </li>
+
+
+                    </ul>
+                    <!-- End navigation menu -->
+                </div> <!-- end #navigation -->
+            </div> <!-- end container -->
+        </div> <!-- end navbar-custom -->
+    </header>
+    <!-- End Navigation Bar-->
+
+
+    <div v-show="action === 'home'" class="wrapper">
+        <div class="container-fluid">
+
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="btn-group pull-right">
+                            <ol class="breadcrumb hide-phone p-0 m-0">
+                                <li class="breadcrumb-item"><a href="#">Supply Chain</a></li>
+                                <li class="breadcrumb-item active">Dashboard</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Participants</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title end breadcrumb -->
+
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="widget-panel widget-style-2 bg-white">
+                        <i class="md md-attach-money text-primary"></i>
+                        <h2 class="m-0 text-dark counter font-600"
+                            @click="submit_query_party('producer')">Producer</h2>
+                        <div class="text-muted m-t-5">Shenzhen</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="widget-panel widget-style-2 bg-white">
+                        <i class="md md-location-city text-info"></i>
+                        <h2 class="m-0 text-dark counter font-600"
+                            @click="submit_query_party('exporter')">Exporter</h2>
+                        <div class="text-muted m-t-5">Shanghai</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="widget-panel widget-style-2 bg-white">
+                        <i class="md md-directions-ferry text-info"></i>
+                        <h2 class="m-0 text-dark counter font-600"
+                            @click="submit_query_party('carrier')">Carrier</h2>
+                        <div class="text-muted m-t-5">South China Sea</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="widget-panel widget-style-2 bg-white">
+                        <i class="md md-domain text-info"></i>
+                        <h2 class="m-0 text-dark counter font-600"
+                            @click="submit_query_party('importer')">Importer</h2>
+                        <div class="text-muted m-t-5">Johor</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="widget-panel widget-style-2 bg-white">
+                        <i class="md md-store-mall-directory text-info"></i>
+                        <h2 class="m-0 text-dark counter font-600"
+                            @click="submit_query_party('distributor')">Distributor</h2>
+                        <div class="text-muted m-t-5">Singapore</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="widget-panel widget-style-2 bg-white">
+                        <i class="md md-local-offer text-info"></i>
+                        <h2 class="m-0 text-dark counter font-600"
+                            @click="jump_participant('consumer')">Consumer</h2>
+                        <div class="text-muted m-t-5">Singapore</div>
+                    </div>
+                </div>
+            </div>
+
+            <div v-show="current_user.permissions.indexOf(1) >=0">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <h4 class="page-title">Add Entry</h4>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="widget-panel widget-style-2 bg-white">
+                            <i class="md md-create text-primary"></i>
+                            <h2 class="m-0 text-dark counter font-600"><a href="supplychain/postrecords.html" style="color:#797979">Entry</a>
+                            </h2>
+                            <div class="text-muted m-t-5">Manual</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="widget-panel widget-style-2 bg-white">
+                            <i class="md md-camera-alt text-primary"></i>
+                            <h2 class="m-0 text-dark counter font-600"><a href="qr-code/qr-code.html" style="color:#797979">Scan
+                                QR</a>
+                            </h2>
+                            <div class="text-muted m-t-5">Auto</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">Trends</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card-box">
+                        <h4 class="text-dark header-title m-t-0">Total Revenue</h4>
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="text-center">
+                                    <ul class="list-inline chart-detail-list">
+                                        <li class="list-inline-item">
+                                            <h5><i class="fa fa-circle m-r-5" style="color: #36404a;"></i>Desktops</h5>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <h5><i class="fa fa-circle m-r-5" style="color: #5d9cec;"></i>Tablets</h5>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <h5><i class="fa fa-circle m-r-5" style="color: #bbbbbb;"></i>Mobiles</h5>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div id="morris-area-with-dotted" style="height: 300px;"></div>
+
+                            </div>
+
+
+                            <div class="col-md-4">
+
+                                <p class="font-600">iMacs <span class="text-primary pull-right">80%</span></p>
+                                <div class="progress m-b-30">
+                                    <div class="progress-bar progress-bar-primary progress-animated wow animated"
+                                         role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+                                         style="width: 80%">
+                                    </div><!-- /.progress-bar .progress-bar-danger -->
+                                </div><!-- /.progress .no-rounded -->
+
+                                <p class="font-600">iBooks <span class="text-pink pull-right">50%</span></p>
+                                <div class="progress m-b-30">
+                                    <div class="progress-bar progress-bar-pink progress-animated wow animated"
+                                         role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
+                                         style="width: 50%">
+                                    </div><!-- /.progress-bar .progress-bar-pink -->
+                                </div><!-- /.progress .no-rounded -->
+
+                                <p class="font-600">iPhone 5s <span class="text-info pull-right">70%</span></p>
+                                <div class="progress m-b-30">
+                                    <div class="progress-bar progress-bar-info progress-animated wow animated"
+                                         role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+                                         style="width: 70%">
+                                    </div><!-- /.progress-bar .progress-bar-info -->
+                                </div><!-- /.progress .no-rounded -->
+
+                                <p class="font-600">iPhone 6 <span class="text-warning pull-right">65%</span></p>
+                                <div class="progress m-b-30">
+                                    <div class="progress-bar progress-bar-warning progress-animated wow animated"
+                                         role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"
+                                         style="width: 65%">
+                                    </div><!-- /.progress-bar .progress-bar-warning -->
+                                </div><!-- /.progress .no-rounded -->
+
+                                <p class="font-600">iPhone 6s <span class="text-success pull-right">40%</span></p>
+                                <div class="progress m-b-30">
+                                    <div class="progress-bar progress-bar-success progress-animated wow animated"
+                                         role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
+                                         style="width: 40%">
+                                    </div><!-- /.progress-bar .progress-bar-success -->
+                                </div><!-- /.progress .no-rounded -->
+
+
+                            </div>
+
+
+                        </div>
+
+                        <!-- end row -->
+
+                    </div>
+
+                </div>
+
+
+            </div>
+            <!-- end row -->
+
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">Analytics</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <h4 class="m-t-0 m-b-20 header-title"><b>Line Chart</b></h4>
+                        <div id="sparkline1"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <h4 class="m-t-0 m-b-20 header-title"><b>Bar Chart</b></h4>
+                        <div id="sparkline2" class="text-center"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <h4 class="m-t-0 m-b-20 header-title"><b>Pie Chart</b></h4>
+                        <div id="sparkline3" class="text-center"></div>
+                    </div>
+                </div>
+            </div><!-- Row -->
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <h4 class="m-t-0 m-b-20 header-title"><b>Custom Line Chart</b></h4>
+                        <div id="sparkline4" class="text-center"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <h4 class="m-t-0 m-b-20 header-title"><b>Dynamic Chart</b></h4>
+                        <div id="sparkline5" class="text-center"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <h4 class="m-t-0 m-b-20 header-title"><b>Composite bar Chart</b></h4>
+                        <div id="sparkline6" class="text-center"></div>
+                    </div>
+                </div>
+            </div><!-- Row -->
+
+        </div> <!-- end container -->
+    </div>
+    <div v-show="action === 'participants' " class="wrapper">
+        <div class="container-fluid">
+
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="btn-group pull-right">
+                            <ol class="breadcrumb hide-phone p-0 m-0">
+                                <li class="breadcrumb-item"><a href="#">Supply Chain</a></li>
+                                <!--<li class="breadcrumb-item"><a href="#">Supply Chain</a></li>-->
+                                <li class="breadcrumb-item"><a href="../supplychain-dashboard.html">Participants</a>
+                                </li>
+                                <li class="breadcrumb-item active"><span v-text="field"></span></li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Participant</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title end breadcrumb -->
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-box table-responsive">
+                        <h4 class="m-t-0 header-title">Product list at: <span v-text="field"></span></h4>
+                        <!--<p class="text-muted font-14 m-b-30">-->
+                        <!--DataTables has most features enabled by default, so all you need to do to use it with your own-->
+                        <!--tables is to call the construction function: <code>$().DataTable();</code>.-->
+                        <!--</p>-->
+                        <br/>
+
+                        <table id="datatable-1" class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Serial No.</th>
+                                <th>Name</th>
+                                <th>Cost</th>
+                                <th>Code No</th>
+                                <th>Location</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr v-for="item in result_party">
+                                <td v-text="item.SerialNo"></td>
+                                <td v-text="item.Name"></td>
+                                <td v-text="item.Cost"></td>
+                                <td v-text="item.CodeNo"></td>
+                                <td v-text="item.Location"></td>
+                                <td>
+                                    <template>
+                                        <button @click="handleNext(item)" class="btn btn-default btn-custom btn-rounded waves-effect waves-light" size="small">Next</button>
+                                    </template>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> <!-- end row -->
+
+
+        </div> <!-- end container -->
+    </div>
+    <div v-show="action === 'postrecords' " class="wrapper">
+        <div class="container-fluid">
+
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="btn-group pull-right">
+                            <ol class="breadcrumb hide-phone p-0 m-0">
+                                <li class="breadcrumb-item"><a href="#">Supplychain</a></li>
+                                <!--<li class="breadcrumb-item"><a href="#">Supply Chain</a></li>-->
+                                <li class="breadcrumb-item active">Post Recordse</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Post Records</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title end breadcrumb -->
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-box table-responsive">
+                        <!--<h4 class="m-t-0 header-title"><span v-text="participant"></span></h4>-->
+                        <!--<p class="text-muted font-14 m-b-30">-->
+                        <!--DataTables has most features enabled by default, so all you need to do to use it with your own-->
+                        <!--tables is to call the construction function: <code>$().DataTable();</code>.-->
+                        <!--</p>-->
+                        <br/>
+                        <div class="p-20">
+                            <form class="form-horizontal" role="form" id="postrecord" :model="postrecord" ref="postrecord">
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label">Product Name</label>
+                                    <div class="col-10">
+                                        <input type="text" class="form-control" v-model="postrecord.name" name="name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label">Product Code</label>
+                                    <div class="col-10">
+                                        <input type="text" class="form-control" v-model="postrecord.code" name="code">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label">Product Cost</label>
+                                    <div class="col-10">
+                                        <input type="text" class="form-control" v-model="postrecord.cost" name="cost">
+                                    </div>
+                                </div>
+
+                                <!--<div class="form-group row">-->
+                                <!--<label class="col-2 col-form-label">Upload File</label>-->
+                                <!--<input type="file" class="filestyle" data-iconname="fa fa-cloud-upload"-->
+                                <!--id='uploadfile' name="file">-->
+                                <!--&lt;!&ndash;<button type="file" class="filestyle" id='uploadfile' name="file" @click="process_upload()">Upload File</button>&ndash;&gt;-->
+                                <!--</div>-->
+
+                                <button type="submit" class="btn btn-primary" @click="postrecords">Submit</button>
+
+                            </form>
+                        </div>
+
+
+                    </div> <!-- end card-box -->
+                </div><!-- end col -->
+            </div> <!-- end row -->
+
+
+        </div> <!-- end container -->
+    </div>
+    <div v-show="action === 'viewrecords' " class="wrapper">
+        <div class="container-fluid">
+
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="btn-group pull-right">
+                            <ol class="breadcrumb hide-phone p-0 m-0">
+                                <li class="breadcrumb-item"><a href="#">Supply Chain</a></li>
+                                <!--<li class="breadcrumb-item"><a href="#">Supply Chain</a></li>-->
+                                <li class="breadcrumb-item active">Query Products</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Query Products</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title end breadcrumb -->
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-box table-responsive">
+                        <h4 class="m-t-0 header-title"></h4>
+                        <!--<p class="text-muted font-14 m-b-30">-->
+                        <!--DataTables has most features enabled by default, so all you need to do to use it with your own-->
+                        <!--tables is to call the construction function: <code>$().DataTable();</code>.-->
+                        <!--</p>-->
+                        <br/>
+                        <table id="datatable-2" class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Serial No.</th>
+                                <th>Product Name</th>
+                                <th>Product Cost</th>
+                                <th>Product Code</th>
+                                <th style="width: 280px">Location</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr v-for="item in result_all">
+                                <td v-text="item.SerialNo"></td>
+                                <td v-text="item.Name"></td>
+                                <td v-text="item.Cost"></td>
+                                <td v-text="item.CodeNo"></td>
+                                <td v-text="item.Location">
+                                    <template>
+                                        <button type="button" class="btn btn-default waves-effect waves-light" @click="handleNext(item)"  >Next</button>
+                                    </template>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+
+                    </div>
+                </div>
+            </div> <!-- end row -->
+
+
+        </div> <!-- end container -->
+    </div>
+    <div v-show="action === 'queryproducts' " class="wrapper">
+        <div class="container-fluid">
+
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="btn-group pull-right">
+                            <ol class="breadcrumb hide-phone p-0 m-0">
+                                <li class="breadcrumb-item"><a href="#">Supplychain</a></li>
+                                <!--<li class="breadcrumb-item"><a href="#">Supply Chain</a></li>-->
+
+                                <li class="breadcrumb-item active">Query Products</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Query Products</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title end breadcrumb -->
+
+            <div class="p-20">
+                <form id="submit_query_product">
+
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Field</label>
+                        <div class="col-10">
+                            <select id="submit_query_product.field" name="field" class="form-control select2">
+                                <option value="Product Name">Product Name</option>
+                                <option value="Product SerialNo">Product Serial No.</option>
+                                <option value="Product CodeNo">Product Code No.</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Value</label>
+                        <div class="col-10">
+                            <input type="text" class="form-control" name="value" id="submit_query_product.value">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-primary" @click="query_products">
+                        Submit
+                    </button>
+                </form>
+            </div>
+
+            <div v-show="result_query_product.length>0" class="row">
+                <div class="col-12">
+                    <div class="card-box table-responsive">
+                        <h4 class="m-t-0 header-title"></h4>
+                        <!--<p class="text-muted font-14 m-b-30">-->
+                        <!--DataTables has most features enabled by default, so all you need to do to use it with your own-->
+                        <!--tables is to call the construction function: <code>$().DataTable();</code>.-->
+                        <!--</p>-->
+                        <br/>
+
+                        <table id="datatable-3" class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Serial No.</th>
+                                <th>Name</th>
+                                <th>Cost</th>
+                                <th>Code No</th>
+                                <th>Location</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr v-for="item in result_query_product">
+                                <td v-text="item.SerialNo"></td>
+                                <td v-text="item.Name"></td>
+                                <td v-text="item.Cost"></td>
+                                <td v-text="item.CodeNo"></td>
+                                <td v-text="item.Location"></td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> <!-- end row -->
+
+
+        </div> <!-- end container -->
+    </div>
+    <div v-show="action === 'queryhistory' " class="wrapper">
+        <div class="container-fluid">
+
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="btn-group pull-right">
+                            <ol class="breadcrumb hide-phone p-0 m-0">
+                                <li class="breadcrumb-item"><a href="#">Supplychain</a></li>
+                                <!--<li class="breadcrumb-item"><a href="#">Supply Chain</a></li>-->
+                                <!--<li class="breadcrumb-item"><a href="../supplychain-dashboard.html">Dashboard</a></li>-->
+                                <li class="breadcrumb-item active">Query Products</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Query Products</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title end breadcrumb -->
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-box table-responsive">
+                        <h4 class="m-t-0 header-title"></h4>
+                        <!--<p class="text-muted font-14 m-b-30">-->
+                        <!--DataTables has most features enabled by default, so all you need to do to use it with your own-->
+                        <!--tables is to call the construction function: <code>$().DataTable();</code>.-->
+                        <!--</p>-->
+                        <br/>
+                        <div class="p-20">
+                            <form class="form-horizontal" role="form" id="query_product_history" ref="query_product_history">
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label">Product Serial No.</label>
+                                    <div class="col-10">
+                                        <input type="text" class="form-control" v-model="query_product_history.value">
+                                    </div>
+                                </div>
+
+                                <button type="submit"  @click="submit_query_product_history">Submit</button>
+
+                            </form>
+
+                        </div>
+                        <div v-show="result_query_product_history.length>0" class="row">
+                            <div class="col-12">
+                                <div class="card-box table-responsive">
+                                    <h4 class="m-t-0 header-title">Result</h4>
+                                    <!--<p class="text-muted font-14 m-b-30">-->
+                                    <!--DataTables has most features enabled by default, so all you need to do to use it with your own-->
+                                    <!--tables is to call the construction function: <code>$().DataTable();</code>.-->
+                                    <!--</p>-->
+                                    <br/>
+
+                                    <table id="datatable-4" class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>Snapshot</th>
+                                            <th>Timestamp</th>
+                                            <th>Location</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <tr v-for="item in result_query_product_history">
+                                            <td v-text="item.Snapshot"></td>
+                                            <td v-text="item.Timestamp"></td>
+                                            <td v-text="item.Location"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div> <!-- end row -->
+
+
+                    </div>
+                </div>
+            </div> <!-- end row -->
+
+
+        </div> <!-- end container -->
+    </div>
+    <div v-show="action === 'accounts'" class="wrapper">
+        <div class="container-fluid">
+
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="btn-group pull-right">
+                            <ol class="breadcrumb hide-phone p-0 m-0">
+                                <li class="breadcrumb-item"><a href="#">Supply chain</a></li>
+                                <!--<li class="breadcrumb-item"><a href="#">Supply Chain</a></li>-->
+                                <!--<li class="breadcrumb-item"><a-->
+                                        <!--href="../supplychain-dashboard.html">Dashboard</a></li>-->
+                                <li class="breadcrumb-item active">Accounts</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Account Information</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title end breadcrumb -->
+
+            <div class="p-20">
+                <form id="accountinfo">
+                    <h5><b>Particulars</b></h5>
+                    <select id="accountinfo.dir" name="dir" class="form-control select2">
+                        <option value="Income">Income</option>
+                        <option value="Expenditure">Expenditure</option>
+                    </select>
+                    <h5><b>Participant</b></h5>
+                    <select id="accountinfo.loc" name="loc" class="form-control select2">
+                        <option value="Producer">Producer</option>
+                        <option value="Exporter">Exporter</option>
+                        <option value="Carrier">Carrier</option>
+                        <option value="Importer">Importer</option>
+                        <option value="Distributor">Distributor</option>
+                        <option value="Customer">Customer</option>
+                    </select>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-primary" @click="query_account_info">
+                        Submit
+                    </button>
+                </form>
+            </div>
+
+            <div v-show="result_accountinfo.length>0" class="row">
+                <div class="col-12">
+                    <div class="card-box table-responsive">
+                        <h4 class="m-t-0 header-title"></h4>
+                        <!--<p class="text-muted font-14 m-b-30">-->
+                        <!--DataTables has most features enabled by default, so all you need to do to use it with your own-->
+                        <!--tables is to call the construction function: <code>$().DataTable();</code>.-->
+                        <!--</p>-->
+                        <br/>
+
+                        <table id="datatable" class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Snapshot</th>
+                                <th>Timestamp</th>
+                                <th>Serial No.</th>
+                                <th>Pdt. Name</th>
+                                <th>Pdt. Cost</th>
+                                <th>Pdt. Code</th>
+                                <th>Party</th>
+                                <th>Particulars</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr v-for="item in result_accountinfo">
+                                <td v-text="item.Snapshot"></td>
+                                <td v-text="item.Timestamp"></td>
+                                <td v-text="item.SerialNo"></td>
+                                <td v-text="item.Name"></td>
+                                <td v-text="item.Cost"></td>
+                                <td v-text="item.CodeNo"></td>
+                                <td v-text="item.Party"></td>
+                                <td v-text="item.Direction"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> <!-- end row -->
+
+
+        </div> <!-- end container -->
+    </div>
+    <div v-show="action === 'blockchain'" class="wrapper">
+        <div class="container-fluid">
+
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="btn-group pull-right">
+                            <ol class="breadcrumb hide-phone p-0 m-0">
+                                <li class="breadcrumb-item"><a href="#">Supply chain</a></li>
+                                <!--<li class="breadcrumb-item"><a href="#">Supply Chain</a></li>-->
+                                <!--<li class="breadcrumb-item"><a href="../supplychain-dashboard-new.html">Dashboard</a></li>-->
+                                <li class="breadcrumb-item active">Blockchain</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Blockchain</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title end breadcrumb -->
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-box table-responsive">
+                        <!--<h4 class="m-t-0 header-title"><span v-text="participant"></span></h4>-->
+                        <!--<p class="text-muted font-14 m-b-30">-->
+                        <!--DataTables has most features enabled by default, so all you need to do to use it with your own-->
+                        <!--tables is to call the construction function: <code>$().DataTable();</code>.-->
+                        <!--</p>-->
+                        <br/>
+
+                        <pre v-text="result_blockchain"></pre>
+                        <!--<table id="datatable" class="table table-bordered">-->
+                        <!--<thead>-->
+                        <!--<tr>-->
+                        <!--<th>Index</th>-->
+                        <!--<th>Timestamp</th>-->
+                        <!--<th>BlockProductData</th>-->
+                        <!--<th>PrevHash</th>-->
+                        <!--<th>ThisHash</th>-->
+                        <!--</tr>-->
+                        <!--</thead>-->
+
+                        <!--<tbody>-->
+                        <!--<tr v-for="item in result_blockchain">-->
+                        <!--<td v-text="item.Index"></td>-->
+                        <!--<td v-text="item.Timestamp"></td>-->
+                        <!--<td v-text="item.BlockProductData"></td>-->
+                        <!--<td v-text="item.PrevHash"></td>-->
+                        <!--<td v-text="item.ThisHash"></td>-->
+                        <!--</tr>-->
+                        <!--</tbody>-->
+                        <!--</table>-->
+
+                    </div>
+                </div>
+            </div> <!-- end row -->
+
+
+        </div> <!-- end container -->
+    </div>
+
+    <!-- end wrapper -->
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    © 2018 NTU
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+</div>
+
+<!--vue.js-->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+<!-- jQuery  -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/popper.min.js"></script><!-- Popper for Bootstrap -->
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/waves.js"></script>
+<script src="assets/js/jquery.slimscroll.js"></script>
+<script src="assets/js/jquery.scrollTo.min.js"></script>
+
+
+<!-- Required datatable js -->
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Buttons examples -->
+<script src="../plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="../plugins/datatables/buttons.bootstrap4.min.js"></script>
+<script src="../plugins/datatables/jszip.min.js"></script>
+<script src="../plugins/datatables/pdfmake.min.js"></script>
+<script src="../plugins/datatables/vfs_fonts.js"></script>
+<script src="../plugins/datatables/buttons.html5.min.js"></script>
+<script src="../plugins/datatables/buttons.print.min.js"></script>
+
+<!-- Key Tables -->
+<script src="../plugins/datatables/dataTables.keyTable.min.js"></script>
+
+<!-- Responsive examples -->
+<script src="../plugins/datatables/dataTables.responsive.min.js"></script>
+<script src="../plugins/datatables/responsive.bootstrap4.min.js"></script>
+
+<!-- Selection table -->
+<script src="../plugins/datatables/dataTables.select.min.js"></script>
+
+
+<!-- App js -->
+<script src="assets/js/jquery.core.js"></script>
+<script src="assets/js/jquery.app.js"></script>
+
+<script src="../plugins/morris/morris.min.js"></script>
+<script src="../plugins/raphael/raphael-min.js"></script>
+
+<script src="../plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
+<script src="assets/pages/jquery.charts-sparkline.js"></script>
+
+<script src="assets/pages/jquery.dashboard_ecommerce.js"></script>
+
+<style>
+    .centering {
+        float: none;
+        margin: 0 auto;
+    }
+</style>
+
+<script>
+    function formData_to_object(formData) {
+        let object = {};
+        formData.forEach((v, k) => {
+            object[k] = v;
+        })
+        return object;
+    }
+
+    let v = new Vue({
+        el: '#app',
+        methods: {
+            switch_div: function (action) {
+                this.action = action;
+            },
+            jump_participant: function (field) {
+                location.href = 'supplychain/participants.html?field=' + field;
+            },
+            submit_query_party: function (field) {
+                let self = this;
+                self.switch_div('participants');
+                axios({
+                    method: 'get',
+                    url: 'api/queryparty.php',
+                    params: {
+                        field: field
+                    },
+                    config: {headers: {'Content-Type': 'multipart/form-data'}}
+                })
+                    .then(function (response) {
+                        //handle success
+                        console.log(response);
+                        let data = response.data;
+                        if (data.status === "fail") {
+                            alert(data.message);
+                        } else {
+                            self.field = field;
+                            self.result_party = response.data;
+                            setTimeout(() => {
+                                self.create_datatable();
+                            }, 0);
+
+                        }
+                    })
+                    .catch(function (response) {
+                        //handle error
+                        console.log(response);
+                    });
+
+            },
+            handleNext: function (record) {
+                let self = this;
+                axios({
+                    method: 'post',
+                    url: 'api/Handlenext.php',
+                    params: {
+                        field: record['SerialNo']
+                    },
+                    config: {headers: {'Content-Type': 'multipart/form-data'}}
+                })
+                    .then(function (response) {
+                        //handle success
+                        console.log(response);
+                        self.submit_query_party(self.field);
+                    })
+                    .catch(function (response) {
+                        //handle error
+                        console.log(response);
+                    });
+
+                //console.log(record);
+
+            },
+            submit_query_all: function () {
+                let self = this;
+                axios({
+                    method: 'get',
+                    url: 'api/info.php',
+                    config: {headers: {'Content-Type': 'multipart/form-data'}}
+                })
+                    .then(function (response) {
+                        //handle success
+                        console.log(response);
+                        self.result_all = response.data;
+                        setTimeout(() => {
+                            self.create_datatable();
+                        }, 0);
+                    })
+                    .catch(function (response) {
+                        //handle error
+                        console.log(response);
+                    });
+            },
+            postrecords: function (e) {
+                e.preventDefault();
+                let self = this;
+                axios({
+                    method: 'post',
+                    url: 'api/postrecords.php',
+                    //params: self.postrecord,
+                    data: new FormData(document.getElementById('postrecord')),
+                    config: {headers: {'Content-Type': 'multipart/form-data'}}
+                })
+                    .then(function (response) {
+                        //handle success
+                        console.log(response);
+                        let data = response.data;
+                        if (data.status === "fail") {
+
+                            alert(data.message);
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(function (response) {
+                        //handle error
+                        console.log(response);
+                    });
+                document.getElementById('postrecord').reset();
+                self.postrecord = {};
+
+            },
+            query_products: function (e) {
+                e.preventDefault();
+                let self = this;
+                axios({
+                    method: 'get',
+                    url: "api/queryproducts.php",
+                    //params: self.accountinfo,
+                    params: formData_to_object(new FormData(document.getElementById('submit_query_product'))),
+                })
+                    .then(function (response) {
+                        console.log(response);
+                        self.result_query_product = response.data;
+                        setTimeout(() => {
+                            self.create_datatable();
+                        }, 0);
+                    })
+                    .catch(function (response) {
+                        console.log(response);
+                    })
+                //document.getElementById('accountinfo').reset();
+                self.submit_query_product = {};
+            },
+            submit_query_product_history: function (e) {
+                e.preventDefault();
+                let self = this;
+                axios({
+                    method: 'get',
+                    url: 'api/queryhistory.php',
+                    params: self.query_product_history,
+                    config: {headers: {'Content-Type': 'multipart/form-data'}}
+                })
+                    .then(function (response) {
+                        //handle success
+                        console.log(response);
+                        if (response.data == null) {
+                            self.result_query_product_history = [];
+                            alert("No records!");
+
+                        } else {
+                            self.result_query_product_history = response.data;
+                            setTimeout(() => {
+                                self.create_datatable();
+                            }, 0);
+                        }
+                    })
+                    .catch(function (response) {
+                        //handle error
+                        console.log(response);
+                    });
+                // document.getElementById('query_product_history').reset();
+                // self.query_product_history = {};
+                // self.result_query_product_history = [];
+
+            },
+            query_account_info: function (e) {
+                e.preventDefault();
+                let self = this;
+                axios({
+                    method: 'get',
+                    url: "api/accountinfo.php",
+                    //params: self.accountinfo,
+                    params: formData_to_object(new FormData(document.getElementById('accountinfo'))),
+                })
+                    .then(function (response) {
+                        console.log(response);
+                        self.result_accountinfo = response.data;
+                        setTimeout(() => {
+                            self.create_datatable();
+                        }, 0);
+                    })
+                    .catch(function (response) {
+                        console.log(response);
+                    })
+                //document.getElementById('accountinfo').reset();
+                self.accountinfo = {};
+            },
+            submit_query_blockchain: function () {
+                let self = this;
+                axios({
+                    method: 'get',
+                    url: 'api/QueryBlockchain.php',
+                    data: new FormData(document.getElementById('query_product')),
+                    config: {headers: {'Content-Type': 'multipart/form-data'}}
+                })
+
+                    .then(function (response) {
+                        //handle success
+                        console.log(response);
+                        let data = response.data;
+
+                        self.result_blockchain = data.message;
+
+
+                    })
+                    .catch(function (response) {
+                        //handle error
+                        console.log(response);
+                    });
+
+
+            },
+
+            fetch_current_user: function () {
+                let self = this;
+                axios({
+                    method: 'get',
+                    url: "api/getcurrentuser.php",
+                    config: {headers: {'content-Type': 'multipart/form-data'}}
+                })
+                    .then(function (response) {
+                        console.log(response);
+                        self.current_user = response.data;
+                    })
+                    .catch(function (response) {
+                        console.log(response);
+                    })
+            },
+            logout: function () {
+                let self = this;
+                axios({
+                    method: 'post',
+                    url: 'api/logout.php',
+                    config: {headers: {'Content-Type': 'multipart/form-data'}}
+                })
+                    .then(function (response) {
+                        //handle success
+                        console.log(response);
+                        let data = response.data;
+                        if (data.status === "fail") {
+                            alert(data.message);
+                        } else {
+                            location.href = data.message;
+                        }
+                    })
+                    .catch(function (response) {
+                        //handle error
+                        console.log(response);
+                    });
+
+            },
+            create_datatable: function () {
+                $('#datatable-1').DataTable();
+                $('#datatable-2').DataTable();
+                $('#datatable-3').DataTable();
+                $('#datatable-4').DataTable();
+                $('#datatable').DataTable();
+
+                //Buttons examples
+                var table = $('#datatable-buttons').DataTable({
+                    lengthChange: false,
+                    buttons: ['copy', 'excel', 'pdf']
+                });
+
+                // Key Tables
+
+                $('#key-table').DataTable({
+                    keys: true
+                });
+
+                // Responsive Datatable
+                $('#responsive-datatable').DataTable();
+
+                // Multi Selection Datatable
+                $('#selection-datatable').DataTable({
+                    select: {
+                        style: 'multi'
+                    }
+                });
+
+                table.buttons().container()
+                    .appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
+            }
+        },
+
+        data() {
+            return {
+                action: 'home',
+                field: '',
+                result_party: [],
+                query_party: {},
+                result_all:[],
+                current_user: {
+                    username: '',
+                    role: 0,
+                    permissions: []
+                },
+                postrecord: {},
+                submit_query_product: {},
+                result_query_product: [],
+                query_product_history:{},
+                result_query_product_history:[],
+                accountinfo: {},
+                result_accountinfo: [],
+                result_blockchain:'',
+            };
+        },
+
+        created: function () {
+            this.fetch_current_user();
+        }
+
+
+    })
+
+    console.log(v)
+</script>
+
+</body>
+</html>

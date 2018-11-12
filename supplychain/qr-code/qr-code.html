@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>NTU Supplychain Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
+    <meta content="Coderthemes" name="author"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <link rel="shortcut icon" href="../assets/images/favicon.ico">
+
+    <!-- Dropzone css -->
+    <link href="../../plugins/dropzone/dropzone.css" rel="stylesheet" type="text/css"/>
+
+    <!-- App css -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../assets/css/icons.css" rel="stylesheet" type="text/css"/>
+    <link href="../assets/css/style.css" rel="stylesheet" type="text/css"/>
+
+    <script src="../assets/js/modernizr.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- Navigation Bar-->
+<header id="topnav">
+    <div class="topbar-main">
+        <div class="container-fluid">
+
+            <!-- Logo container-->
+            <div class="logo">
+                <!-- Text Logo -->
+                <!--<a href="index.html" class="logo">-->
+                <!--UBold-->
+                <!--</a>-->
+                <!-- Image Logo -->
+                <a href="../index.html" class="logo">
+                    <img src="../assets/images/logo_dark.png" alt="" height="20" class="logo-lg">
+                    <img src="../assets/images/logo_sm.png" alt="" height="24" class="logo-sm">
+                </a>
+
+            </div>
+            <!-- End Logo container-->
+
+
+            <div class="menu-extras topbar-custom">
+
+                <ul class="list-inline float-right mb-0">
+
+                    <li class="menu-item list-inline-item">
+                        <!-- Mobile menu toggle-->
+                        <a class="navbar-toggle nav-link">
+                            <div class="lines">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </a>
+                        <!-- End mobile menu toggle-->
+                    </li>
+                    <li class="list-inline-item dropdown notification-list">
+                        <a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-toggle="dropdown"
+                           href="#" role="button"
+                           aria-haspopup="false" aria-expanded="false">
+                            <i class="dripicons-bell noti-icon"></i>
+                            <span class="badge badge-pink noti-icon-badge">4</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-lg"
+                             aria-labelledby="Preview">
+                            <!-- item-->
+                            <div class="dropdown-item noti-title">
+                                <h5><span class="badge badge-danger float-right">5</span>Notification</h5>
+                            </div>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <div class="notify-icon bg-success"><i class="icon-bubble"></i></div>
+                                <p class="notify-details">Robert S. Taylor commented on Admin
+                                    <small class="text-muted">1 min ago</small>
+                                </p>
+                            </a>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <div class="notify-icon bg-info"><i class="icon-user"></i></div>
+                                <p class="notify-details">New user registered.
+                                    <small class="text-muted">1 min ago</small>
+                                </p>
+                            </a>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <div class="notify-icon bg-danger"><i class="icon-like"></i></div>
+                                <p class="notify-details">Carlos Crouch liked <b>Admin</b>
+                                    <small class="text-muted">1 min ago</small>
+                                </p>
+                            </a>
+
+                            <!-- All-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item notify-all">
+                                View All
+                            </a>
+
+                        </div>
+                    </li>
+
+                    <li class="list-inline-item dropdown notification-list">
+                        <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown"
+                           href="#" role="button"
+                           aria-haspopup="false" aria-expanded="false">
+                            <img src="../assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown " aria-labelledby="Preview">
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="md md-account-circle"></i> <span>Profile</span>
+                            </a>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="md md-settings"></i> <span>Settings</span>
+                            </a>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="md md-lock-open"></i> <span>Lock Screen</span>
+                            </a>
+
+                            <!-- item-->
+                            <a @click="logout()" class="dropdown-item notify-item">
+                                <i class="md md-settings-power"></i> <span>Logout</span>
+                            </a>
+
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- end menu-extras -->
+
+            <div class="clearfix"></div>
+
+        </div> <!-- end container -->
+    </div>
+    <!-- end topbar-main -->
+
+    <div class="navbar-custom">
+        <div class="container-fluid">
+            <div id="navigation">
+                <!-- Navigation Menu-->
+                <ul class="navigation-menu">
+
+                    <li><a href="../supplychain-dashboard.html"><i class="md md-dashboard"></i>Dashboard</a></li>
+
+                    <li class="has-submenu">
+                        <a href="#"><i class="md md-color-lens"></i>Participants</a>
+                        <ul class="submenu">
+                            <li><a href="../supplychain/participants.html?field=producer">Producer</a></li>
+                            <li><a href="../supplychain/participants.html?field=exporter">Exporter</a></li>
+                            <li><a href="../supplychain/participants.html?field=carrier">Carrier</a></li>
+                            <li><a href="../supplychain/participants.html?field=importer">Importer</a></li>
+                            <li><a href="../supplychain/participants.html?field=distributor">Distributor</a></li>
+                            <li><a href="../supplychain/participants.html?field=consumer">Consumer</a></li>
+                        </ul>
+                    </li>
+
+                    <li v-show="current_user.permissions.indexOf(1) >=0">
+                        <a href="../supplychain/postrecords.html"><i class="md md-layers"></i>Post Records</a></li>
+
+                    <li><a href="../supplychain/viewrecords.html"><i class="md md-class"></i>View Records</a></li>
+                    <li><a href="../supplychain/queryproducts.html"><i class="md md-class"></i>Query Products</a></li>
+                    <li><a href="../supplychain/queryhistory.html"><i class="md md-pages"></i>Query History</a></li>
+                    <li><a href="../supplychain/accounts.html"><i class="md md-folder-special"></i>Accounts</a></li>
+                    <li><a href="../supplychain/blockchain.html"><i class="md md-account-circle"></i>Blockchain</a></li>
+
+
+                </ul>
+                <!-- End navigation menu -->
+            </div> <!-- end #navigation -->
+        </div> <!-- end container -->
+    </div> <!-- end navbar-custom -->
+</header>
+<!-- End Navigation Bar-->
+
+
+<div id="app" class="wrapper">
+    <div class="container-fluid">
+
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="btn-group pull-right">
+                        <ol class="breadcrumb hide-phone p-0 m-0">
+                            <li class="breadcrumb-item"><a href="#">Supply Chain</a></li>
+                            <li class="breadcrumb-item active"><a href="#">QR Code</a></li>
+                        </ol>
+                    </div>
+                    <h4 class="page-title">Scan QR Code</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title end breadcrumb -->
+
+        <div class="row">
+            <div class="col-md-12 portlets">
+                <div class="m-b-30">
+                    <form class="dropzone" id="postrecord">
+                        <div class="fallback">
+                            <label class=qrcode-text-btn style="margin-left : auto">
+                                <input type="file" id="qr_file"
+                                       accept="image/*" capture=environment
+                                       @change="read_qrcode" multiple/>
+                            </label>
+                        </div>
+                    </form>
+
+                    <div class="clearfix pull-right m-t-15">
+                        <button type="button" @click="postrecords"
+                                class="btn btn-pink btn-rounded waves-effect waves-light">Submit
+                        </button>
+                    </div>&nbsp;&nbsp;&nbsp;
+                    <div class="clearfix pull-right m-t-15">
+                        <button type="button" @click="process_upload"
+                                class="btn btn-pink btn-rounded waves-effect waves-light">Upload
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+
+        <div v-show="result_qrcode_showintable.length > 0" class="row">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-box table-responsive">
+
+                        <table id="datatable" class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Product name</th>
+                                <th>Product code</th>
+                                <th>Product cost</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <!--<tr v-for="item in result_read_qrcode">-->
+                            <td v-text="result_read_qrcode.name"></td>
+                            <td v-text="result_read_qrcode.code"></td>
+                            <td v-text="result_read_qrcode.cost"></td>
+                            <!--</tr>-->
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div> <!-- end container -->
+</div>
+<!-- end wrapper -->
+
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                © 2018 NTU
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer -->
+
+
+<!-- jQuery  -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/popper.min.js"></script><!-- Popper for Bootstrap -->
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/waves.js"></script>
+<script src="../assets/js/jquery.slimscroll.js"></script>
+<script src="../assets/js/jquery.scrollTo.min.js"></script>
+
+<!-- Page Specific JS Libraries -->
+<script src="../../plugins/dropzone/dropzone.js"></script>
+
+<!-- App js -->
+<script src="../assets/js/jquery.core.js"></script>
+<script src="../assets/js/jquery.app.js"></script>
+<script src='https://dmla.github.io/jsqrcode/src/qr_packed.js'></script>
+
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+<script>
+    // Dropzone.autoDiscover = false;
+    let app = new Vue({
+        el: '#app',
+        methods: {
+            read_qrcode: function (node) {
+                let self = this;
+                var reader = new FileReader();
+                reader.onload = function () {
+                    // node.value = "";
+                    qrcode.callback = function (res) {
+                        if (res instanceof Error) {
+                            alert("No QR code found. Please make sure the QR code is within the camera's frame and try again.");
+                        } else {
+                            self.result_read_qrcode = JSON.parse(res);
+                            self.result_qrcode_showintable = res;
+                            //self.postrecords(res);
+                        }
+                    };
+                    qrcode.decode(reader.result);
+                };
+                reader.readAsDataURL(document.getElementById('qr_file').files[0]);
+            },
+            postrecords: function (e) {
+                e.preventDefault();
+                let self = this;
+                let form = new FormData();
+                form.set('name', self.result_read_qrcode['name']);
+                form.set('code', self.result_read_qrcode['code']);
+                form.set('cost', self.result_read_qrcode['cost']);
+                axios({
+                    method: 'post',
+                    url: '../api/postrecords.php',
+                    data: form,
+                    //data: new FormData(document.getElementById('postrecord')),
+                    config: {headers: {'Content-Type': 'multipart/form-data'}}
+                })
+                    .then(function (response) {
+                        //handle success
+                        console.log(response);
+                        let data = response.data;
+                        if (data.status === "fail") {
+
+                            alert(data.message);
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(function (response) {
+                        //handle error
+                        console.log(response);
+                    });
+            },
+            process_upload() {
+                document.getElementById('qr_file').click();
+                // document.getElementById('postrecord').click();
+            },
+            create_datatable: function () {
+                $('#datatable').DataTable();
+
+                //Buttons examples
+                var table = $('#datatable-buttons').DataTable({
+                    lengthChange: false,
+                    buttons: ['copy', 'excel', 'pdf']
+                });
+
+                // Key Tables
+
+                $('#key-table').DataTable({
+                    keys: true
+                });
+
+                // Responsive Datatable
+                $('#responsive-datatable').DataTable();
+
+                // Multi Selection Datatable
+                $('#selection-datatable').DataTable({
+                    select: {
+                        style: 'multi'
+                    }
+                });
+
+                table.buttons().container()
+                    .appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
+            },
+            // init_dropzone: () => {
+            //     let myDropzone = new Dropzone('#postrecord', {
+            //         url: "/file/post",
+            //         autoQueue: false,
+            //         autoProcessQueue: false
+            //     });
+            //     myDropzone.on("addedfile", function (file) {
+            //         console.log(file);
+            //     });
+            // }
+
+            logout: function () {
+                let self = this;
+                axios({
+                    method: 'post',
+                    url: 'api/logout.php',
+                    config: {headers: {'Content-Type': 'multipart/form-data'}}
+                })
+                    .then(function (response) {
+                        //handle success
+                        console.log(response);
+                        let data = response.data;
+                        if (data.status === "fail") {
+                            alert(data.message);
+                        } else {
+                            location.href = data.message;
+                        }
+                    })
+                    .catch(function (response) {
+                        //handle error
+                        console.log(response);
+                    });
+
+            },
+
+        },
+        // created: function () {
+        //     this.init_dropzone();
+        // },
+        data() {
+            return {
+                postrecord: '',
+                result_qrcode_showintable: [],
+                result_postrecorl: [],
+                result_read_qrcode: [],
+            }
+        }
+
+    })
+    console.log(app)
+</script>
+
+</body>
+</html>
