@@ -15,7 +15,7 @@ $location_name = $_REQUEST["location_name"];
 $company_name = $_REQUEST["company_name"];
 
 
-$postaction = "http://127.0.0.1:5432/api/event" ;
+$postaction = "http://127.0.0.1:8000/api/event" ;
 $response = file_get_contents($postaction);
 $msg = 'You have posted the record successfully!';
 echo json_encode(['status' => 'success', "message" => $msg]);
