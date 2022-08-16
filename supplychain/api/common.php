@@ -96,8 +96,8 @@ function getDBH()
 {
     static $dbh = null;
     if ($dbh === null) {
-        // $dbh = new PDO("mysql:dbname=supplychain;host=127.1", "supplyuser", "chainuser");
-        $dbh = new PDO("mysql:dbname=heroku_a2869373e9ca23f;host=us-cdbr-iron-east-01.cleardb.net", "b69d6d61cb2e3d", "38c67e52");
+        $dbh = new PDO("mysql:dbname=supplychain;host=127.1", "supplyuser", "chainuser");
+//        $dbh = new PDO("mysql:dbname=heroku_a2869373e9ca23f;host=us-cdbr-iron-east-01.cleardb.net", "b69d6d61cb2e3d", "38c67e52");
     }
     return $dbh;
 }
