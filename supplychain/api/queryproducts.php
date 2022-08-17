@@ -6,7 +6,7 @@ switch($field){
     case "GTIN": $field='GTIN';break;
 }
 
-$postaction="http://127.0.0.1:8000/api/trace/"."$value";
+$postaction="http://127.0.0.1:5432/api/trace/"."$value";
 
 $response = file_get_contents($postaction);
 $response = json_decode($response, TRUE);

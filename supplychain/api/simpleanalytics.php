@@ -1,12 +1,12 @@
 <?php
 
-$gln = $_GET["value"];
+$gln = $_GET["gln"];
 
 
 
 //$location = $_GET["loc"];
 
-$postaction="http://127.0.0.1:8000/api/analytics/"."$gln";
+$postaction="http://127.0.0.1:5432/api/analytics/"."$gln";
 
 $response = file_get_contents($postaction);
 $response = json_decode($response, TRUE);

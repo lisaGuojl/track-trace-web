@@ -54,10 +54,10 @@
                     <!--UBold-->
                     <!--</a>-->
                     <!-- Image Logo -->
-                    <a href="supplychain-dashboard.html" class="logo">
-                        <img src="assets/images/logo_dark.png" alt="" height="24" class="logo-lg">
-                        <img src="assets/images/logo_sm.png" alt="" height="24" class="logo-sm">
-                    </a>
+                    <!--<a href="supplychain-dashboard.html" class="logo">-->
+                        <!--<img src="assets/images/logo_dark.png" alt="" height="24" class="logo-lg">-->
+                        <!--<img src="assets/images/logo_sm.png" alt="" height="24" class="logo-sm">-->
+                    <!--</a>-->
 
                 </div>
                 <!-- End Logo container-->
@@ -209,172 +209,12 @@
                 </div>
             </div> -->
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card-box">
 
-
-                        <div class="row">
-                            <div class="col-md-8">
-                                <!--<div class="text-center">-->
-                                    <!--<ul class="list-inline chart-detail-list">-->
-                                        <!--<li class="list-inline-item">-->
-                                            <!--<h5><i class="fa fa-circle m-r-5" style="color: #36404a;"></i>Desktops</h5>-->
-                                        <!--</li>-->
-                                        <!--<li class="list-inline-item">-->
-                                            <!--<h5><i class="fa fa-circle m-r-5" style="color: #5d9cec;"></i>Tablets</h5>-->
-                                        <!--</li>-->
-                                        <!--<li class="list-inline-item">-->
-                                            <!--<h5><i class="fa fa-circle m-r-5" style="color: #bbbbbb;"></i>Mobiles</h5>-->
-                                        <!--</li>-->
-                                    <!--</ul>-->
-                                <!--</div>-->
-
-                                <div id="morris-area-with-dotted" style="height: 300px;"></div>
-
-                            </div>
-
-                        </div>
-
-                        <!-- end row -->
-
-                    </div>
-
-                </div>
-
-
-            </div>
             <!-- end row -->
 
 
 
         </div> <!-- end container -->
-    </div>
-    <div v-show="action === 'participants'" class="wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-12">
-
-
-                    <div class="page-title-box">
-                        <div class="btn-group pull-right">
-                            <ol class="breadcrumb hide-phone p-0 m-0">
-                                <li class="breadcrumb-item"><a href="#">Track&Trace</a></li>
-                                <!--<li class="breadcrumb-item"><a href="#">Supply Chain</a></li>-->
-                                <li class="breadcrumb-item"><a href="../supplychain-dashboard.html">Participants</a>
-                                </li>
-                                <li class="breadcrumb-item active"><span v-text="field"></span></li>
-                            </ol>
-                        </div>
-                        <h4 class="page-title">Participant</h4>
-                    </div>
-                </div>
-            </div>
-
-            <!-- end page title end breadcrumb -->
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="nav nav-tabs tabs">
-                        <li class="nav-item tab">
-                            <a @click="submit_query_party('producer')" data-toggle="tab" aria-expanded="false"
-                               class="nav-link">
-                                Producer
-                            </a>
-                        </li>
-                        <li class="nav-item tab">
-                            <a data-toggle="tab" aria-expanded="false" class="nav-link"
-                               @click="submit_query_party('exporter')">
-                                Exporter
-                            </a>
-                        </li>
-                        <li class="nav-item tab">
-                            <a @click="submit_query_party('carrier')"
-                               data-toggle="tab" aria-expanded="false" class="nav-link">
-                                Carrier
-                            </a>
-                        </li>
-                        <li class="nav-item tab">
-                            <a @click="submit_query_party('importer')"
-                               data-toggle="tab" aria-expanded="false" class="nav-link">
-                                Importer
-                            </a>
-                        </li>
-                        <li class="nav-item tab">
-                            <a @click="submit_query_party('distributor')"
-                               data-toggle="tab" aria-expanded="false" class="nav-link">
-                                Distributor
-                            </a>
-                        </li>
-                        <li class="nav-item tab">
-                            <a @click="submit_query_party('consumer')"
-                               data-toggle="tab" aria-expanded="false" class="nav-link">
-                                Consumer
-                            </a>
-                        </li>
-                    </ul>
-
-                    <div v-if="field!='consumer'" class="tab-content">
-                        <div class="tab-pane active" id="home-2">
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="home-3">
-                                    <div class="tab-content">
-
-                                            <vue-bootstrap-table
-                                                    class="table table-bordered"
-                                                    :columns="columns"
-                                                    :values="result_party"
-                                                    :show-filter="true"
-                                                    :show-column-picker="false"
-                                                    :sortable="true"
-                                                    :paginated="true"
-                                                    :multi-column-sortable=true
-                                                    :filter-case-sensitive=false
-
-                                            >
-                                            </vue-bootstrap-table>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div v-else class="tab-content">
-                        <div class="tab-pane active">
-                            <div class="tab-pane active">
-                                <div class="tab-content">
-                                    <div class="tab-pane active" >
-                                        <div class="tab-content">
-
-                                            <vue-bootstrap-table
-                                                    class="table table-bordered"
-                                                    :columns="columns_consumer"
-                                                    :values="result_party"
-                                                    :show-filter="true"
-                                                    :show-column-picker="false"
-                                                    :sortable="true"
-                                                    :paginated="true"
-                                                    :multi-column-sortable=true
-                                                    :filter-case-sensitive=false
-
-                                            >
-                                            </vue-bootstrap-table>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
     </div>
     <div v-show="action === 'postrecords' " class="wrapper">
         <div class="container-fluid">
@@ -888,19 +728,14 @@
                 <div class="col-12">
                     <div class="card-box table-responsive">
                         <h4 class="m-t-0 header-title"></h4>
-                        <!--<p class="text-muted font-14 m-b-30">-->
-                        <!--DataTables has most features enabled by default, so all you need to do to use it with your own-->
-                        <!--tables is to call the construction function: <code>$().DataTable();</code>.-->
-                        <!--</p>-->
                         <br/>
                         <div class="p-20">
-                            <form class="form-horizontal" role="form" id="query_gln"
-                                  ref="query_gln">
+                            <form id="query_gln">
                                 <div class="form-group row">
                                     <label class="col-2 col-form-label">GLN</label>
                                     <div class="col-10">
-                                        <input type="text" class="form-control" name="value"
-                                               id="query_gln.value">
+                                        <input type="text" class="form-control" name="gln"
+                                               id="query_gln.gln">
                                     </div>
                                 </div>
 
@@ -911,29 +746,31 @@
 
                             </form>
 
+
                         </div>
-                        <div v-show="result_simple_analytics.length>0" class="row">
+                        <div v-show="result_simple_analytics.tx_number>0" class="row">
                             <div class="col-12">
                                 <div class="card-box table-responsive">
                                     <h4 class="m-t-0 header-title">Result</h4>
+                                    <!--<span v-text="query_gln.gln"></span>-->
                                     <br/>
-                                    <!--<p class="text-muted font-14 m-b-30">-->
-                                    <!--You have already submitted <code>$().DataTable();</code> transactions.-->
-                                    <!--</p>-->
+                                    <p class="text-muted font-14 m-b-30">
+                                    You have already submitted <span v-text="result_simple_analytics.tx_number"></span> transactions.
+                                    </p>
 
-                                    <table class="table table-bordered">
-                                        <thead>
-                                        <tr>
-                                            <th>Total Transaction Number</th>
-                                        </tr>
-                                        </thead>
+                                    <!--<table class="table table-bordered">-->
+                                        <!--<thead>-->
+                                        <!--<tr>-->
+                                            <!--<th>Total Transaction Number</th>-->
+                                        <!--</tr>-->
+                                        <!--</thead>-->
 
-                                        <tbody>
-                                        <tr>
-                                            <td v-text="result_simple_analytics.tx_number"></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                        <!--<tbody>-->
+                                        <!--<tr v-for="item in result_simple_analytics">-->
+                                            <!--<td v-text="item.tx_number"></td>-->
+                                        <!--</tr>-->
+                                        <!--</tbody>-->
+                                    <!--</table>-->
                                 </div>
                             </div>
                         </div>
@@ -1082,7 +919,7 @@
 <!--<script src="assets/js/jquery.app.js"></script>-->
 <script src='https://dmla.github.io/jsqrcode/src/qr_packed.js'></script>
 
-<script src="../plugins/morris/morris.min.js"></script>
+<!--<script src="../plugins/morris/morris.min.js"></script>-->
 <script src="../plugins/raphael/raphael-min.js"></script>
 
 <script src="../plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
@@ -1124,92 +961,13 @@
             switch_div: function (action) {
                 this.action = action;
                 this.query_product_history={};
+                this.query_gln = {}
                 this.result_query_product_history=[];
                 this.result_query_product=[];
                 this.result_simple_analytics=[];
             },
             jump_participant: function (field) {
                 location.href = 'supplychain/participants.html?field=' + field;
-            },
-            next_func: function(colname, entry) {
-                // let self=this;
-                // self.colname=colname;
-
-                return '<button type="button" onclick="v.dynamic_func('+entry['SerialNo']+')"\n' +
-                    '                                                    class="btn btn-default btn-custom btn-rounded waves-effect waves-light"\n' +
-                    '                                                    id="chaining-alert-1" size="small">Transfer\n' +
-                    '                                            </button>';
-            },
-            next_func_consumer: function(colname, entry) {
-                // let self=this;
-                // self.colname=colname;
-
-                return '<button type="button" onclick="v.confirm_func('+entry['SerialNo']+')"\n' +
-                    '                                                    class="btn btn-default btn-custom btn-rounded waves-effect waves-light"\n' +
-                    '                                                    id="chaining-alert-1" size="small">Confirm\n' +
-                    '                                            </button>';
-            },
-            submit_query_party: function (field) {
-                let self = this;
-                self.switch_div('participants');
-                setTimeout(() => {
-                    $('ul.tabs a:contains(' + field.charAt(0).toUpperCase() + field.slice(1) + ')').trigger('click');
-                }, 0);
-                axios({
-                    method: 'get',
-                    url: 'api/queryparty.php',
-                    params: {
-                        field: field
-                    },
-                    config: {headers: {'Content-Type': 'multipart/form-data'}}
-                })
-                    .then(function (response) {
-                        //handle success
-                        console.log(response);
-                        let data = response.data;
-                        if (data.status === "fail") {
-                            alert(data.message);
-                        } else {
-                            self.field = field;
-                            // self.result_party = response.data;
-                            self.result_party.length = 0;
-                            self.result_party.push(...response.data);
-                            setTimeout(() => {
-                                self.create_datatable('#datatable-1');
-                                self.create_datatable('#datatable-5');
-                            }, 0);
-
-                        }
-                    })
-                    .catch(function (response) {
-                        //handle error
-                        console.log(response);
-                    });
-
-            },
-
-            handleNext: function (record) {
-                let self = this;
-                axios({
-                    method: 'post',
-                    url: 'api/Handlenext.php',
-                    params: {
-                        field: record
-                    },
-                    config: {headers: {'Content-Type': 'multipart/form-data'}}
-                })
-                    .then(function (response) {
-                        //handle success
-                        console.log(response);
-                        self.submit_query_party(self.field);
-                    })
-                    .catch(function (response) {
-                        //handle error
-                        console.log(response);
-                    });
-
-                //console.log(record);
-
             },
 
             submit_query_all: function () {
@@ -1313,7 +1071,7 @@
                         console.log(response);
                     });
                 // document.getElementById('query_product_history').reset();
-                // self.query_product_history = {};
+                self.query_product_history = {};
                 // self.result_query_product_history = [];
 
             },
@@ -1341,18 +1099,15 @@
                 //document.getElementById('accountinfo').reset();
                 self.accountinfo = {};
             },
-            simple_analytics: function () {
+            simple_analytics: function (e) {
+                e.preventDefault();
                 let self = this;
-                axios({
-                    method: 'get',
-                    url: 'api/simpleanalytics.php',
-                    data: new FormData(document.getElementById('query_gln')),
-                })
 
+                fetch('api/simpleanalytics.php?gln='+document.getElementById('query_gln.gln').value)
+                    .then(r=>r.json())
                     .then(function (response) {
                         console.log(response);
-                        self.result_simple_analytics.length = 0;
-                        self.result_simple_analytics.push(...response.data);
+                        self.result_simple_analytics = response;
                         // setTimeout(() => {
                         //     self.create_datatable('#datatable');
                         // }, 0);
@@ -1360,8 +1115,8 @@
                     .catch(function (response) {
                         console.log(response);
                     })
-                //document.getElementById('accountinfo').reset();
-                self.simple_analytics = {};
+                // document.getElementById('query_gln.gln').reset();
+                // self.query_gln = {};
 
 
             },
@@ -1731,8 +1486,8 @@
             return {
                 action: 'home',
                 field: '',
-                result_party: [],
-                query_party: {},
+                // result_party: [],
+                // query_party: {},
                 result_all: [],
                 current_user: {
                     username: '',
